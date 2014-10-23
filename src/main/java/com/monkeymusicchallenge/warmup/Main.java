@@ -1,5 +1,7 @@
 package com.monkeymusicchallenge.warmup;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +40,7 @@ public class Main {
     //   warmup.monkeymusicchallenge.com/team/<your-team-name>
     //
     // Surf to this URL and watch your monkey carry out your commands!
-    final String teamUrl = SERVER_URL + "/team/" + teamName;
+    final String teamUrl = SERVER_URL + "/team/" + urlEncode(teamName);
 
     // We've put the AI-code in a separate class
     final AI ai = new AI();
@@ -103,6 +105,15 @@ public class Main {
       System.out.println("  " + e.getMessage());
       System.exit(1);
       throw new AssertionError(); // unreachable
+    }
+  }
+
+  // gotta remember to URL encode them team names!
+  private static String urlEncode(final String s) {
+    try {
+      return URLEncoder.encode(s, "UTF-8");
+    } catch (final UnsupportedEncodingException e) {
+      throw new AssertionError("Your computer does not support UTF-8 encoding.");
     }
   }
 }
