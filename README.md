@@ -26,7 +26,7 @@ Then, open up a terminal and:
 git clone git@github.com:<username>/java-starter-kit.git
 cd java-starter-kit
 mvn package
-java -jar target/warmup.jar <your-team-name> <your-api-key>
+java -jar target/warmup.jar <your-team-name> <your-api-key> <game-id>
 ```
 
 Use [Eclipse](http://eclipse.org) or [IDEA](http://www.jetbrains.com/idea)? Run `mvn eclipse:eclipse` or `mvn idea:idea` and then import into your favorite IDE.
@@ -35,21 +35,9 @@ Issues with `maven` or `java`? Did you remember to upgrade your [Java](https://w
 
 These are all UNIX commands. Got Windows? We recommend [Cygwin](https://www.cygwin.com/).
 
-Make sure to surf to your team page before running the above commands...
+Make sure to surf to your game page before running the above commands...
 
 Your monkey is waiting for you!
-
-### How to complete the warmup challenge
-
-`Main.java` contains the boilerplate needed to communicate with the server. You should not need to change anything in here unless we have done something wrong.
-
-We suggest you go straight to `AI.java` and start playing around with the code.
-
-Remember, your mission is to:
-
-* guide your monkey through the warmup level
-* pick up all the music items
-* get them to the eagerly awaiting Spotify user
 
 Have fun!
 
