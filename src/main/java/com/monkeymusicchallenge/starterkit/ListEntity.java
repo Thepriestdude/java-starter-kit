@@ -1,10 +1,11 @@
 package main.java.com.monkeymusicchallenge.starterkit;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListEntity {
-	int [] coordinates;
-	List<ListEntity> connection;
+	ArrayList<Integer> coordinates = new ArrayList<Integer>();
+	List<ListEntity> connection = new ArrayList<ListEntity>();
 	ListEntity right;
 	String holding;
 
@@ -13,9 +14,8 @@ public class ListEntity {
 		
 	}
 	public ListEntity (int x, int y, String holding) {
-		coordinates[0] = x;
-		coordinates[1] = y;
-		this.coordinates = coordinates;
+		coordinates.add(x);
+		coordinates.add(y);
 		this.holding = holding;
 
 	}
@@ -25,5 +25,8 @@ public class ListEntity {
 	}
 	public void SetHolding (String holding) {
 		this.holding = holding;
+	}
+	public String GetHolding (){
+		return this.holding;
 	}
 }

@@ -21,6 +21,7 @@ public class AI {
 		else
 			currentListBuilder.updateListBuilder(gameState);
 		
+		
 		// Go to http://github.com/monkey-music-challenge/core
 		// for more info about the rules of Monkey Music Challenge!
 
