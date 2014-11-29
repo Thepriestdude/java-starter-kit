@@ -1,3 +1,5 @@
+package main.java.com.monkeymusicchallenge.bee;
+
 /*
  * A* algorithm implementation.
  * Copyright (C) 2007, 2009 Giuseppe Scrivano <gscrivano@gnu.org>

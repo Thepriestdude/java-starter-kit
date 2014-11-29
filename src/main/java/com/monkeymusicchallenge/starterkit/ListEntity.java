@@ -1,4 +1,4 @@
-package main.java.com.monkeymusicchallenge.starterkit;
+package main.java.com.monkeymusicchallenge.bee;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class ListEntity {
 
 
 	public ListEntity (){
-		
+
 	}
 	public ListEntity (int x, int y, String holding) {
 		coordinates[0] = x;
@@ -19,7 +19,7 @@ public class ListEntity {
 		this.holding = holding;
 
 	}
-	
+
 	public void AddConnection (ListEntity connection) {
 		this.connection.add(connection);
 	}

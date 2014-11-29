@@ -1,4 +1,4 @@
-package main.java.com.monkeymusicchallenge.starterkit;
+package main.java.com.monkeymusicchallenge.bee;
 
 import java.util.ArrayList;
 
@@ -14,21 +14,21 @@ public class ListBuilder {
 	int[] currentPosition;
 
 	public ListBuilder (){
-		
+
 	}
 
-	public ArrayList<ArrayList<ListEntity>> createList(JSONObject gameState) { 
+	public ArrayList<ArrayList<ListEntity>> createList(JSONObject gameState) {
 		this.currentStringLayout = getStringRepresentation(gameState);
 
 		//check row pairs
 		for(int x = 0; x < nrOfRows-1; x++){
 			for(int y = 0; y < nrOfColumns; y++){
 				if (!currentStringLayout[x][y].equals("wall") && !(currentStringLayout[x][y+1]).equals("wall")){
-					
+
 					//Update Holding for both nodes
 					LayoutListEntity.get(x).get(y).SetHolding(currentStringLayout[x][y]);
 					LayoutListEntity.get(x).get(y+1).SetHolding(currentStringLayout[x][y+1]);
-					
+
 					//add connectivity for both nodes
 					LayoutListEntity.get(x).get(y).AddConnection(LayoutListEntity.get(x).get(y+1));
 					LayoutListEntity.get(x).get(y+1).AddConnection(LayoutListEntity.get(x).get(y));
@@ -36,16 +36,16 @@ public class ListBuilder {
 				}
 			}
 		}
-		
+
 		//check column pairs
 		for(int x = 0; x < nrOfRows-1; x++){
 			for(int y = 0; y < nrOfColumns; y++){
 				if (!currentStringLayout[x][y].equals("wall") && !(currentStringLayout[x][y+1]).equals("wall")){
-					
+
 					//Update Holding for both nodes
 					LayoutListEntity.get(x).get(y).SetHolding(currentStringLayout[x][y]);
 					LayoutListEntity.get(x).get(y+1).SetHolding(currentStringLayout[x][y+1]);
-					
+
 					//add connectivity for both nodes
 					LayoutListEntity.get(x).get(y).AddConnection(LayoutListEntity.get(x).get(y+1));
 					LayoutListEntity.get(x).get(y+1).AddConnection(LayoutListEntity.get(x).get(y));
@@ -71,7 +71,7 @@ public class ListBuilder {
 		for (int rows = 0; rows < currentLayout.length(); rows++) {	//for all rows
 			row = (JSONArray) currentLayout.get(rows);	//use the row
 			for (int column = 0; column < row.length(); column++) {	//for all columns in the row
-				returnStringLayout[rows][column] = (String)row.get(column);	//insert the string to our matrix		
+				returnStringLayout[rows][column] = (String)row.get(column);	//insert the string to our matrix
 			}
 		}
 
@@ -96,11 +96,11 @@ public class ListBuilder {
 	public void updateListBuilder(JSONObject gameState) {
 		this.oldStringLayout = this.currentStringLayout;
 		this.currentStringLayout = getStringRepresentation(gameState);
-		
+
 		JSONArray currentLayout = gameState.getJSONArray("layout");
 		nrOfRows = currentLayout.length();
 		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
-		
+
 		for (int x = 0; x < nrOfRows; x++) {
 			for (int y = 0; y < nrOfColumns; y++) {
 				if( !(currentStringLayout[x][y]==oldStringLayout[x][y]) ){
@@ -109,22 +109,22 @@ public class ListBuilder {
 			}
 		}
 
-	} 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

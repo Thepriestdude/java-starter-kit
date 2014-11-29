@@ -1,12 +1,15 @@
+package main.java.com.monkeymusicchallenge.bee;
 
 public class MonkeyAStar extends AStar {
 
   ListEntry goal = null;
 
+
   /**
    * Default c'tor.
    */
-  public AStar(){
+  public AStar(AI game){
+      this.game = game;
       super.AStar();
   }
 
@@ -32,6 +35,19 @@ public class MonkeyAStar extends AStar {
    * @return The cost of the operation.
    */
   protected Double g(T from, T to){
+    /*
+    Goal prio
+    1. if inventory is full user
+    2. if rabies banana
+    3. if rabies trap
+    4. playlist
+    5. doublenote
+    6. note
+    */
+    if () {
+
+    }
+
 
     return 1.0;
   }

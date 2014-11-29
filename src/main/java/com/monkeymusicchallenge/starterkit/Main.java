@@ -1,4 +1,4 @@
-package main.java.com.monkeymusicchallenge.starterkit;
+package main.java.com.monkeymusicchallenge.bee;
 
 import java.util.HashMap;
 import java.util.Map;
