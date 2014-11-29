@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
+import java.util.Scanner;
 
 // Hi! Welcome to the Monkey Music Challenge Java starter kit!
 
@@ -17,26 +18,14 @@ public class Main {
   private static final String GAME_URL = "http://competition.monkeymusicchallenge.com/game";
 
   public static void main(final String[] args) {
-
-    // Don't forget to provide the right command line arguments
-    if (args.length < 3) {
-      System.out.println("Usage: java -jar target/monkey.jar <your-team-name> <your-api-key> <game-id>\n");
-      if (args.length < 1) {
-        System.out.println(" Missing argument: <your-team-name>");
-      }
-      if (args.length < 2) {
-        System.out.println(" Missing argument: <your-api-key>");
-      }
-      if (args.length < 3) {
-        System.out.println(" Missing argument: <game-id>");
-      }
-      System.exit(1);
-    }
+	System.out.print("Enter game ID: ");
+	Scanner gameIDScanner = new Scanner(System.in);
+	String gameID = gameIDScanner.nextLine();
 
     // You identify yourselves by your team name, your API key, and the current game ID
-    final String teamName = args[0];
-    final String apiKey = args[1];
-    final String gameId = args[2];
+    final String teamName = "Bee";
+    final String apiKey = "TKY5vloLtO9S21JBkes4+tsxFOI=";
+    final String gameId = gameID;
 
     // We've put the AI-code in a separate class
     final AI ai = new AI();
