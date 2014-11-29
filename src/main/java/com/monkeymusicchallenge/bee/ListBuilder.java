@@ -13,7 +13,7 @@ public class ListBuilder {
 	int nrOfColumns;
 	int[] currentPosition;
 
-	public ListBuilder (){
+	public ListBuilder(){
 
 	}
 
@@ -140,6 +140,6 @@ public class ListBuilder {
 
 
 =======
-	} 
+	}
 >>>>>>> Stashed changes
 }

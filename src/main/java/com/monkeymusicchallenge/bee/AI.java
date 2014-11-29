@@ -10,41 +10,40 @@ public class AI {
 
   private List<String> inventory;
   private ListBuilder gameLayout;
+  private MonkeyAStar astar;
 
   public AI(){
     gameLayout = new ListBuilder();
-
+    astar = new MonkeyAStar();
   }
 
 
   public String decision(){
     /*
     Make a decision
-
-
     - Go to nearest music
-
-    -
+    - if ...
      - Go to trap
-
-    -
+    - if ...
      - Go to banana
-
-    - if neighbour is
-     - Go to coord
-
+    - Go to coord
     - Use banana
-
     - if lever is within range and
      - Go to lever
-
     - if monkey has wall on (right and left) or (up and down)
      - Use trap
-
     - if inventory is full
      - Go to user
+    */
+    /*
+    
+    astar.setGoal(goal);
+    List<T> path = astar.compute(start);
+
+    path.length()
 
     */
+
     return "up";
 
   }

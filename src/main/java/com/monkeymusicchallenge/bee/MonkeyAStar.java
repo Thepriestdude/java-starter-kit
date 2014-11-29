@@ -8,9 +8,12 @@ public class MonkeyAStar extends AStar {
   /**
    * Default c'tor.
    */
-  public AStar(AI game){
-      this.game = game;
-      super.AStar();
+  public MonkeyAStar(){
+      super();
+  }
+
+  public void setGoal(ListEntry node){
+    this.goal = node;
   }
 
   /**
@@ -44,10 +47,6 @@ public class MonkeyAStar extends AStar {
     5. doublenote
     6. note
     */
-    if () {
-
-    }
-
 
     return 1.0;
   }
