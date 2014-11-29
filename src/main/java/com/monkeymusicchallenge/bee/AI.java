@@ -9,18 +9,19 @@ import org.json.JSONObject;
 
 public class AI {
 
-  private List<String> inventory;
-  private ListBuilder gameLayout;
-  private MonkeyAStar astar;
-
-  public AI(){
-    gameLayout = new ListBuilder();
-    astar = new MonkeyAStar();
-  }
+	private List<String> inventory;
+	public ListBuilder currentListBuilder; //BE CARFUL WITH THIS ONE!!!
+	private MonkeyAStar astar;
 
 
-  public String decision(){
-    /*
+	public AI(){
+		currentListBuilder = new ListBuilder();
+		astar = new MonkeyAStar();
+	}
+
+
+	public String decision(){
+		/*
     Make a decision
     - Go to nearest music
     - if ...
@@ -35,29 +36,29 @@ public class AI {
      - Use trap
     - if inventory is full
      - Go to user
-    */
-    /*
-    
+		 */
+		/*
+
     astar.setGoal(goal);
     List<T> path = astar.compute(start);
 
     path.length()
 
-    */
+		 */
 
-    return "up";
+		return "up";
 
-  }
+	}
 
-  public Map<String, Object> move(final JSONObject gameState) {
-    // Go to http://github.com/monkey-music-challenge/core
-    // for more info about the rules of Monkey Music Challenge!
+	public Map<String, Object> move(final JSONObject gameState) {
+		// Go to http://github.com/monkey-music-challenge/core
+		// for more info about the rules of Monkey Music Challenge!
 
-    // TODO: You may want to do something smarter here
-    final Map<String, Object> nextCommand = new HashMap<String, Object>();
-    nextCommand.put("command", "move");
-    nextCommand.put("direction", decision());
-    return nextCommand;
-  }
+		// TODO: You may want to do something smarter here
+		final Map<String, Object> nextCommand = new HashMap<String, Object>();
+		nextCommand.put("command", "move");
+		nextCommand.put("direction", decision());
+		return nextCommand;
+	}
 
 }

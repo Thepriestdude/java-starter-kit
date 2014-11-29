@@ -1,18 +1,16 @@
 package main.java.com.monkeymusicchallenge.bee;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListEntity {
 	ArrayList<Integer> coordinates = new ArrayList<Integer>();
-	List<ListEntity> connection = new ArrayList<ListEntity>();
+	ArrayList<ListEntity> connection = new ArrayList<ListEntity>();
 	ListEntity right;
 	String holding;
+	
 
-
-	public ListEntity (){
-
-	}
 	public ListEntity (int x, int y, String holding) {
 		coordinates.add(x);
 		coordinates.add(y);
@@ -28,5 +26,12 @@ public class ListEntity {
 	}
 	public String GetHolding (){
 		return this.holding;
+	}
+	public ArrayList<Integer>getCoordinates(){
+		return coordinates;
+	}
+	public ArrayList<ListEntity>getConnections(){
+		return connection;
+		
 	}
 }

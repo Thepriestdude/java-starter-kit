@@ -119,27 +119,5 @@ public class ListBuilder {
 			}
 			System.out.println("");
 		}
-
-<<<<<<< Updated upstream
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
-	}
->>>>>>> Stashed changes
 }
