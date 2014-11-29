@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.monkeymusic</groupId>
-  <artifactId>warmup</artifactId>
+  <artifactId>starterkit</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <mainClass>com.monkeymusicchallenge.warmup.Main</mainClass>
+    <mainClass>com.monkeymusicchallenge.starterkit.Main</mainClass>
   </properties>
 
   <dependencies>
@@ -20,7 +20,7 @@
 
   <!-- http://www.youtube.com/watch?v=kLO1djacsfg -->
   <build>
-    <finalName>warmup</finalName>
+    <finalName>monkey</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
