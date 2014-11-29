@@ -8,7 +8,7 @@ import org.json.JSONObject;
 public class ListBuilder {
 	String[][] oldStringLayout;
 	String[][] currentStringLayout;
-	ArrayList<ArrayList<ListEntity>> LayoutListEntity;
+	ArrayList<ArrayList<ListEntity>> LayoutListEntity = new ArrayList<ArrayList<ListEntity>>();
 	int nrOfRows;
 	int nrOfColumns;
 	int[] currentPosition;
@@ -20,9 +20,10 @@ public class ListBuilder {
 	public ArrayList<ArrayList<ListEntity>> createList(JSONObject gameState) {
 		this.currentStringLayout = getStringRepresentation(gameState);
 
+		System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns"+nrOfColumns);
 		//check row pairs
-		for(int x = 0; x < nrOfRows-1; x++){
-			for(int y = 0; y < nrOfColumns; y++){
+		for(int x = 0; x < nrOfRows; x++){
+			for(int y = 0; y < nrOfColumns-1; y++){
 				if (!currentStringLayout[x][y].equals("wall") && !(currentStringLayout[x][y+1]).equals("wall")){
 
 					//Update Holding for both nodes
@@ -40,15 +41,15 @@ public class ListBuilder {
 		//check column pairs
 		for(int x = 0; x < nrOfRows-1; x++){
 			for(int y = 0; y < nrOfColumns; y++){
-				if (!currentStringLayout[x][y].equals("wall") && !(currentStringLayout[x][y+1]).equals("wall")){
+				if (!currentStringLayout[x][y].equals("wall") && !(currentStringLayout[x+1][y]).equals("wall")){
 
 					//Update Holding for both nodes
 					LayoutListEntity.get(x).get(y).SetHolding(currentStringLayout[x][y]);
-					LayoutListEntity.get(x).get(y+1).SetHolding(currentStringLayout[x][y+1]);
+					LayoutListEntity.get(x+1).get(y).SetHolding(currentStringLayout[x+1][y]);
 
 					//add connectivity for both nodes
-					LayoutListEntity.get(x).get(y).AddConnection(LayoutListEntity.get(x).get(y+1));
-					LayoutListEntity.get(x).get(y+1).AddConnection(LayoutListEntity.get(x).get(y));
+					LayoutListEntity.get(x).get(y).AddConnection(LayoutListEntity.get(x+1).get(y));
+					LayoutListEntity.get(x+1).get(y).AddConnection(LayoutListEntity.get(x).get(y));
 
 				}
 			}
@@ -84,13 +85,16 @@ public class ListBuilder {
 		nrOfRows = currentLayout.length();
 		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
 
+
+		//ArrayList<ListEntity> empty = new ArrayList<ListEntity>
 		for (int x = 0; x < nrOfRows; x++){
-			LayoutListEntity.add(x, new ArrayList<ListEntity>());
-			for(int y = 0; y < nrOfColumns; y++){
-				LayoutListEntity.get(x).add(y, new ListEntity(x, y, null) );
+			LayoutListEntity.add(new ArrayList<ListEntity>());
+		}
+		for (int x = 0; x < nrOfRows; x++){
+			for (int y = 0; y < nrOfColumns; y++){
+				LayoutListEntity.get(y).add(new ListEntity(x, y, null) );
 			}
 		}
-
 	}
 
 	public void updateListBuilder(JSONObject gameState) {
@@ -107,6 +111,13 @@ public class ListBuilder {
 					LayoutListEntity.get(x).get(y).SetHolding(currentStringLayout[x][y]);
 				}
 			}
+		}
+
+		for (int x = 0; x < LayoutListEntity.size(); x++){
+			for(int y = 0; y < LayoutListEntity.get(x).size(); y++){
+				System.out.print(LayoutListEntity.get(x).get(y).GetHolding()+", ");
+			}
+			System.out.println("");
 		}
 
 	}
