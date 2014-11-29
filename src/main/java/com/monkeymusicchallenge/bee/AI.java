@@ -37,7 +37,7 @@ public class AI {
      - Go to user
     */
     /*
-    
+
     astar.setGoal(goal);
     List<T> path = astar.compute(start);
 
@@ -50,10 +50,6 @@ public class AI {
   }
 
   public Map<String, Object> move(final JSONObject gameState) {
-    // Go to http://github.com/monkey-music-challenge/core
-    // for more info about the rules of Monkey Music Challenge!
-
-    // TODO: You may want to do something smarter here
     final Map<String, Object> nextCommand = new HashMap<String, Object>();
     nextCommand.put("command", "move");
     nextCommand.put("direction", decision());
