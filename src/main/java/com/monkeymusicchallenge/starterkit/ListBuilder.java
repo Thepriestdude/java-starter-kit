@@ -20,7 +20,7 @@ public class ListBuilder {
 	public ArrayList<ArrayList<ListEntity>> createList(JSONObject gameState) {
 		this.currentStringLayout = getStringRepresentation(gameState);
 
-		System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns"+nrOfColumns);
+		System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns: "+nrOfColumns);
 		//check row pairs
 		for(int x = 0; x < nrOfRows; x++){
 			for(int y = 0; y < nrOfColumns-1; y++){
@@ -120,6 +120,7 @@ public class ListBuilder {
 			System.out.println("");
 		}
 
+<<<<<<< Updated upstream
 	}
 
 
@@ -138,4 +139,7 @@ public class ListBuilder {
 
 
 
+=======
+	} 
+>>>>>>> Stashed changes
 }
