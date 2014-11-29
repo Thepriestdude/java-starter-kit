@@ -36,8 +36,9 @@ public class AI {
      - Use trap
     - if inventory is full
      - Go to user
-		 */
-		/*
+
+    */
+    /*
 
     astar.setGoal(goal);
     List<T> path = astar.compute(start);
@@ -60,5 +61,4 @@ public class AI {
 		nextCommand.put("direction", decision());
 		return nextCommand;
 	}
-
 }

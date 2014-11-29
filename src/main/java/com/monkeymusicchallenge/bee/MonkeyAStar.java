@@ -4,7 +4,6 @@ public class MonkeyAStar extends AStar {
 
   ListEntry goal = null;
 
-
   /**
    * Default c'tor.
    */
@@ -22,6 +21,7 @@ public class MonkeyAStar extends AStar {
    * @param node The node to check.
    * @return <code>true</code> if it is a goal, <code>false</else> otherwise.
    */
+  @Override
   protected boolean isGoal(T node){
     if ( node.x  ) {
 
@@ -37,6 +37,7 @@ public class MonkeyAStar extends AStar {
    * @param to The node we are reaching.
    * @return The cost of the operation.
    */
+  @Override
   protected Double g(T from, T to){
     /*
     Goal prio
@@ -61,6 +62,7 @@ public class MonkeyAStar extends AStar {
    * @param to The node we are reaching.
    * @return The estimated cost to reach an object.
    */
+  @Override
   protected Double h(T from, T to){
 
     return 1.0;
@@ -73,9 +75,10 @@ public class MonkeyAStar extends AStar {
    * @param node The node we want to expand.
    * @return A list of possible next steps.
    */
+  @Override
   protected List<T> generateSuccessors(T node){
 
-
+    return
 
   }
 
