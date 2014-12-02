@@ -1,8 +1,10 @@
 package main.java.com.monkeymusicchallenge.bee;
 
+import java.util.List;
+
 public class MonkeyAStar extends AStar {
 
-  ListEntry goal = null;
+  ListEntity goal = null;
 
   /**
    * Default c'tor.
@@ -81,5 +83,29 @@ public class MonkeyAStar extends AStar {
     return
 
   }
+
+@Override
+protected boolean isGoal(Object node) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+protected Double g(Object from, Object to) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+protected Double h(Object from, Object to) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+protected List generateSuccessors(Object node) {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }

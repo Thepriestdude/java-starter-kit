@@ -79,6 +79,93 @@ public class ListBuilder {
 		return returnStringLayout;
 	}
 
+	public ArrayList<ListEntity> getBananaEntities(JSONObject gameState){
+		ArrayList<ListEntity> returnList = new ArrayList<ListEntity>();
+
+		JSONArray currentLayout = gameState.getJSONArray("layout");
+		nrOfRows = currentLayout.length();
+		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
+
+		for (int x = 0; x < nrOfRows; x++){
+			for (int y = 0; y < nrOfColumns; y++){
+				ListEntity temp = LayoutListEntity.get(x).get(y);
+				if (temp.GetHolding().equals("banana") ){
+					returnList.add(temp);
+				}
+			}
+		}
+		return returnList;
+	}
+	
+	public ArrayList<ListEntity> getSongEntities(JSONObject gameState){
+		ArrayList<ListEntity> returnList = new ArrayList<ListEntity>();
+
+		JSONArray currentLayout = gameState.getJSONArray("layout");
+		nrOfRows = currentLayout.length();
+		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
+
+		for (int x = 0; x < nrOfRows; x++){
+			for (int y = 0; y < nrOfColumns; y++){
+				ListEntity temp = LayoutListEntity.get(x).get(y);
+				if (temp.GetHolding().equals("song") ){
+					returnList.add(temp);
+				}
+			}
+		}
+		return returnList;
+	}
+	public ArrayList<ListEntity> getAlbumEntities(JSONObject gameState){
+		ArrayList<ListEntity> returnList = new ArrayList<ListEntity>();
+
+		JSONArray currentLayout = gameState.getJSONArray("layout");
+		nrOfRows = currentLayout.length();
+		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
+
+		for (int x = 0; x < nrOfRows; x++){
+			for (int y = 0; y < nrOfColumns; y++){
+				ListEntity temp = LayoutListEntity.get(x).get(y);
+				if (temp.GetHolding().equals("album") ){
+					returnList.add(temp);
+				}
+			}
+		}
+		return returnList;
+	}
+	public ArrayList<ListEntity> getPlaylistEntities(JSONObject gameState){
+		ArrayList<ListEntity> returnList = new ArrayList<ListEntity>();
+
+		JSONArray currentLayout = gameState.getJSONArray("layout");
+		nrOfRows = currentLayout.length();
+		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
+
+		for (int x = 0; x < nrOfRows; x++){
+			for (int y = 0; y < nrOfColumns; y++){
+				ListEntity temp = LayoutListEntity.get(x).get(y);
+				if (temp.GetHolding().equals("playlist") ){
+					returnList.add(temp);
+				}
+			}
+		}
+		return returnList;
+	}
+	public ArrayList<ListEntity> getTrapEntities(JSONObject gameState){
+		ArrayList<ListEntity> returnList = new ArrayList<ListEntity>();
+
+		JSONArray currentLayout = gameState.getJSONArray("layout");
+		nrOfRows = currentLayout.length();
+		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
+
+		for (int x = 0; x < nrOfRows; x++){
+			for (int y = 0; y < nrOfColumns; y++){
+				ListEntity temp = LayoutListEntity.get(x).get(y);
+				if (temp.GetHolding().equals("trap") ){
+					returnList.add(temp);
+				}
+			}
+		}
+		return returnList;
+	}
+
 	public void GridFiller(JSONObject gameState){
 		JSONArray currentLayout = gameState.getJSONArray("layout");
 
