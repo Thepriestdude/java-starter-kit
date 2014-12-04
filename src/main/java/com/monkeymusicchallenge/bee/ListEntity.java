@@ -31,15 +31,25 @@ public class ListEntity {
 	public String getHolding (){
 		return this.holding;
 	}
-	public ArrayList<Integer>getCoordinates(){
+	public ArrayList<Integer> getCoordinates(){
 		return coordinates;
 	}
-	public ArrayList<ListEntity>getConnections(){
+	public ArrayList<ListEntity> getConnections(){
 		return connection;
 
 	}
 
-	// behvövs equals metod
+	@Override
+	public boolean equals(Object other) {
+		boolean result = false;
+		if (other instanceof ListEntity) {
+			ListEntity that = (ListEntity) other;
+			result = (this.x == that.x && this.y == that.y && this.getClass().equals(that.getClass()));
+		}
+		return result;
+	}
 
-	// behövs toString metod
+	public String toString() {
+		return "ListEntity{" + x + ", " + y + ", "+holding+"}";
+	}
 }

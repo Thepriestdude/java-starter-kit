@@ -11,14 +11,30 @@ public class ListBuilder {
 	ArrayList<ArrayList<ListEntity>> LayoutListEntity = new ArrayList<ArrayList<ListEntity>>();
 	int nrOfRows;
 	int nrOfColumns;
-	int[] currentPosition;
+	ListEntity currentPosition;
 
-	public ListBuilder(){
 
+	private static ListBuilder instance = null;
+
+	protected ListBuilder() {
+		// Exists only to defeat instantiation.
+	}
+	public static ListBuilder getInstance() {
+		if(instance == null) {
+			instance = new ListBuilder();
+		}
+		return instance;
+	}
+	public static ListEntity getCurrentPosition(){
+		return ListBuilder.getInstance().currentPosition;
 	}
 
 	public ArrayList<ArrayList<ListEntity>> createList(JSONObject gameState) {
 		this.currentStringLayout = getStringRepresentation(gameState);
+
+		JSONArray pos = gameState.getJSONArray("position");
+		currentPosition = new ListEntity(pos.getInt(0), pos.getInt(1), "monkey");
+		System.out.println("Monkey is now at "+currentPosition);
 
 		System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns: "+nrOfColumns);
 		//check row pairs
@@ -112,6 +128,10 @@ public class ListBuilder {
 	public void updateListBuilder(JSONObject gameState) {
 		this.oldStringLayout = this.currentStringLayout;
 		this.currentStringLayout = getStringRepresentation(gameState);
+
+		JSONArray pos = gameState.getJSONArray("position");
+		currentPosition = new ListEntity(pos.getInt(0), pos.getInt(1), "monkey");
+		System.out.println("Monkey is now at "+currentPosition);
 
 		JSONArray currentLayout = gameState.getJSONArray("layout");
 		nrOfRows = currentLayout.length();

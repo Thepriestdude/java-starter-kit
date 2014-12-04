@@ -11,7 +11,7 @@ import com.mashape.unirest.http.Unirest;
 import java.util.Scanner;
 
 // Kör med:
-// mvn package && java -jar target/monkeybrain.jar Bee TKY5vloLtO9S21JBkes4+tsxFOI= 1
+// mvn clean package && java -jar target/monkeybrain.jar Bee TKY5vloLtO9S21JBkes4+tsxFOI= 400
 
 public class Main {
 	private static final String GAME_URL = "http://competition.monkeymusicchallenge.com/game";
@@ -53,7 +53,6 @@ public class Main {
 		final AI ai = new AI();
 
 		ai.currentListBuilder.GridFiller(currentGameState);
-
 		ai.currentListBuilder.createList(currentGameState);
 
 		// The current game state tells you if the game is over

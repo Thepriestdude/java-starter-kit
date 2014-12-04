@@ -1,17 +1,30 @@
 package com.monkeymusicchallenge.bee;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.lang.Math;
 
 public class MonkeyAStar extends AStar {
 
   ListEntity goal = null;
 
-  /**
-   * Default c'tor.
-   */
-  public MonkeyAStar(){
-      super();
+
+  private static MonkeyAStar instance = null;
+
+  protected MonkeyAStar() {
+    //super();
+  }
+  public static MonkeyAStar getInstance() {
+    if(instance == null) {
+      instance = new MonkeyAStar();
+    }
+    return instance;
+  }
+
+  public static ArrayList<ListEntity> getShortestPath(ListEntity start, ListEntity end){
+    MonkeyAStar.getInstance().setGoal(end);
+    return (ArrayList<ListEntity>)MonkeyAStar.getInstance().compute(start);
+
   }
 
   public void setGoal(ListEntity node){
@@ -26,7 +39,7 @@ public class MonkeyAStar extends AStar {
    */
   @Override
   protected boolean isGoal(Object node){
-    return goal.equals(node) ? true : false;
+    return this.goal.equals(node) ? true : false;
   }
 
   /**
@@ -66,12 +79,15 @@ public class MonkeyAStar extends AStar {
    http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
    */
   @Override
-  protected Double h(Object from, Object to){
-    from = (ListEntity) from;
-    to = (ListEntity) to;
-    Double dx = Math.abs((Double)(from.x - to.x));
-    Double dy = Math.abs((Double)(from.y - to.y));
-    return 2 * (dx + dy);
+  protected Double h(Object ofrom, Object oto){
+    if (ofrom == null || oto == null) {
+      return 999999.0;
+    }
+    ListEntity from = (ListEntity) ofrom;
+    ListEntity to = (ListEntity) oto;
+    int dx = Math.abs(from.x - to.x);
+    int dy = Math.abs(from.y - to.y);
+    return (double)(2 * (dx + dy));
   }
 
 
@@ -83,7 +99,10 @@ public class MonkeyAStar extends AStar {
    */
   @Override
   protected List generateSuccessors(Object node) {
-    return ((ListEntity)node).getConnections();
+    if (node == null) {
+      return new ArrayList<ListEntity>();
+    }
+    return (ArrayList<ListEntity>)((ListEntity)node).getConnections();
   }
 
 

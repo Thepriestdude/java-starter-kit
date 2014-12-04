@@ -28,18 +28,16 @@ import java.util.*;
 public abstract class AStar<T>
 {
 		private class Path implements Comparable{
-				public T point;
-				public Double f;
-				public Double g;
-				public Path parent;
+				public T point = null;
+				public Double f = 0.0;
+				public Double g = 0.0;
+				public Path parent = null;
 
 				/**
 				 * Default c'tor.
 				 */
 				public Path(){
-						parent = null;
-						point = null;
-						g = f = 0.0;
+
 				}
 
 				/**
