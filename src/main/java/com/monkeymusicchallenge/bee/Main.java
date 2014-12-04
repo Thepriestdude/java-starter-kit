@@ -1,4 +1,4 @@
-package main.java.com.monkeymusicchallenge.bee;
+package com.monkeymusicchallenge.bee;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,31 +10,37 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import java.util.Scanner;
 
-// Hi! Welcome to the Monkey Music Challenge Java starter kit!
+// Kör med:
+// mvn package && java -jar target/monkeybrain.jar Bee TKY5vloLtO9S21JBkes4+tsxFOI= 1
 
 public class Main {
-	// You control your monkey by sending POST requests to the Monkey Music server
 	private static final String GAME_URL = "http://competition.monkeymusicchallenge.com/game";
-
-
 
 	public static void main(final String[] args) {
 
-		System.out.print("Enter game ID: ");
-		Scanner gameIDScanner = new Scanner(System.in);
-		String gameID = gameIDScanner.nextLine();
+		if (args.length < 3) {
+			System.out.println("Usage: java -jar target/monkey.jar <your-team-name> <your-api-key> <game-id>\n");
+			if (args.length < 1) {
+				System.out.println(" Missing argument: <your-team-name>");
+			}
+			if (args.length < 2) {
+				System.out.println(" Missing argument: <your-api-key>");
+			}
+			if (args.length < 3) {
+				System.out.println(" Missing argument: <game-id>");
+			}
+			System.exit(1);
+		}
+		final String teamName = args[0];
+		final String apiKey = args[1];
+		final String gameId = args[2];
 
-		// You identify yourselves by your team name, your API key, and the current game ID
-		final String teamName = "Bee";
-		final String apiKey = "TKY5vloLtO9S21JBkes4+tsxFOI=";
-		final String gameId = gameID;
 
-		// We've put the AI-code in a separate class
-		final AI ai = new AI();
+		//System.out.print("Enter game ID: ");
+		//Scanner gameIDScanner = new Scanner(System.in);
+		//String gameID = gameIDScanner.nextLine();
 
-		// Allright, time to get started!
 
-		// When we POST a command to the server, it always replies with the current game state
 		final Map<String, Object> joinGameCommand = new HashMap<String, Object>();
 		joinGameCommand.put("command", "join game");
 		joinGameCommand.put("team", teamName);
@@ -43,39 +49,31 @@ public class Main {
 
 		JSONObject currentGameState = postToServer(joinGameCommand);
 
+		// start the brain
+		final AI ai = new AI();
+
 		ai.currentListBuilder.GridFiller(currentGameState);
+
 		ai.currentListBuilder.createList(currentGameState);
+
 		// The current game state tells you if the game is over
 		while (!currentGameState.getBoolean("isGameOver")) {
-			//Variables
-			ListBuilder currentListBuilder = new ListBuilder();
-			boolean firstTurn = true;
+			System.out.println("Remaining turns: " + currentGameState.getInt("remainingTurns"));
 
-			//Constructor
-			public Map<String, Object> move(final JSONObject gameState) {
-				ai.currentListBuilder.updateListBuilder(currentGameState);
-				// The game is not over, time to make a move!
-				System.out.println("Remaining turns: " + currentGameState.getInt("remainingTurns"));
+			final Map<String, Object> nextCommand = ai.move(currentGameState);
 
-				// Use your AI to decide in which direction to move
-				final Map<String, Object> nextCommand = ai.move(currentGameState);
+			nextCommand.put("team", teamName);
+			nextCommand.put("apiKey", apiKey);
+			nextCommand.put("gameId", gameId);
 
-				// Don't forget to include your credentials!
-				nextCommand.put("team", teamName);
-				nextCommand.put("apiKey", apiKey);
-				nextCommand.put("gameId", gameId);
+			currentGameState = postToServer(nextCommand);
+			ai.currentListBuilder.updateListBuilder(currentGameState);
 
-				// ...and send a new move command to the server
-				currentGameState = postToServer(nextCommand);
-
-				// After sending your command, you'll get the new game state back
-				// and we go back up the loop to calculate our next move.
-			}
-
-			// If the game is over, our server will tell you how you did
-			System.out.println("\nGame over!");
-			System.exit(0);
 		}
+
+		// If the game is over, our server will tell you how you did
+		System.out.println("\nGame over!");
+		System.exit(0);
 	}
 
 	// Every time we POST a command to the server, we get the current game state back

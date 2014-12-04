@@ -1,4 +1,4 @@
-package main.java.com.monkeymusicchallenge.bee;
+package com.monkeymusicchallenge.bee;
 
 import java.util.ArrayList;
 
@@ -27,12 +27,12 @@ public class ListBuilder {
 				if (!currentStringLayout[x][y].equals("wall") && !(currentStringLayout[x][y+1]).equals("wall")){
 
 					//Update Holding for both nodes
-					LayoutListEntity.get(x).get(y).SetHolding(currentStringLayout[x][y]);
-					LayoutListEntity.get(x).get(y+1).SetHolding(currentStringLayout[x][y+1]);
+					LayoutListEntity.get(x).get(y).setHolding(currentStringLayout[x][y]);
+					LayoutListEntity.get(x).get(y+1).setHolding(currentStringLayout[x][y+1]);
 
 					//add connectivity for both nodes
-					LayoutListEntity.get(x).get(y).AddConnection(LayoutListEntity.get(x).get(y+1));
-					LayoutListEntity.get(x).get(y+1).AddConnection(LayoutListEntity.get(x).get(y));
+					LayoutListEntity.get(x).get(y).addConnection(LayoutListEntity.get(x).get(y+1));
+					LayoutListEntity.get(x).get(y+1).addConnection(LayoutListEntity.get(x).get(y));
 
 				}
 			}
@@ -44,12 +44,12 @@ public class ListBuilder {
 				if (!currentStringLayout[x][y].equals("wall") && !(currentStringLayout[x+1][y]).equals("wall")){
 
 					//Update Holding for both nodes
-					LayoutListEntity.get(x).get(y).SetHolding(currentStringLayout[x][y]);
-					LayoutListEntity.get(x+1).get(y).SetHolding(currentStringLayout[x+1][y]);
+					LayoutListEntity.get(x).get(y).setHolding(currentStringLayout[x][y]);
+					LayoutListEntity.get(x+1).get(y).setHolding(currentStringLayout[x+1][y]);
 
 					//add connectivity for both nodes
-					LayoutListEntity.get(x).get(y).AddConnection(LayoutListEntity.get(x+1).get(y));
-					LayoutListEntity.get(x+1).get(y).AddConnection(LayoutListEntity.get(x).get(y));
+					LayoutListEntity.get(x).get(y).addConnection(LayoutListEntity.get(x+1).get(y));
+					LayoutListEntity.get(x+1).get(y).addConnection(LayoutListEntity.get(x).get(y));
 
 				}
 			}
@@ -79,87 +79,12 @@ public class ListBuilder {
 		return returnStringLayout;
 	}
 
-	public ArrayList<ListEntity> getBananaEntities(JSONObject gameState){
+	public ArrayList<ListEntity> getEntitiesByType(String type){
 		ArrayList<ListEntity> returnList = new ArrayList<ListEntity>();
-
-		JSONArray currentLayout = gameState.getJSONArray("layout");
-		nrOfRows = currentLayout.length();
-		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
-
-		for (int x = 0; x < nrOfRows; x++){
-			for (int y = 0; y < nrOfColumns; y++){
-				ListEntity temp = LayoutListEntity.get(x).get(y);
-				if (temp.GetHolding().equals("banana") ){
-					returnList.add(temp);
-				}
-			}
-		}
-		return returnList;
-	}
-	
-	public ArrayList<ListEntity> getSongEntities(JSONObject gameState){
-		ArrayList<ListEntity> returnList = new ArrayList<ListEntity>();
-
-		JSONArray currentLayout = gameState.getJSONArray("layout");
-		nrOfRows = currentLayout.length();
-		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
-
-		for (int x = 0; x < nrOfRows; x++){
-			for (int y = 0; y < nrOfColumns; y++){
-				ListEntity temp = LayoutListEntity.get(x).get(y);
-				if (temp.GetHolding().equals("song") ){
-					returnList.add(temp);
-				}
-			}
-		}
-		return returnList;
-	}
-	public ArrayList<ListEntity> getAlbumEntities(JSONObject gameState){
-		ArrayList<ListEntity> returnList = new ArrayList<ListEntity>();
-
-		JSONArray currentLayout = gameState.getJSONArray("layout");
-		nrOfRows = currentLayout.length();
-		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
-
-		for (int x = 0; x < nrOfRows; x++){
-			for (int y = 0; y < nrOfColumns; y++){
-				ListEntity temp = LayoutListEntity.get(x).get(y);
-				if (temp.GetHolding().equals("album") ){
-					returnList.add(temp);
-				}
-			}
-		}
-		return returnList;
-	}
-	public ArrayList<ListEntity> getPlaylistEntities(JSONObject gameState){
-		ArrayList<ListEntity> returnList = new ArrayList<ListEntity>();
-
-		JSONArray currentLayout = gameState.getJSONArray("layout");
-		nrOfRows = currentLayout.length();
-		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
-
-		for (int x = 0; x < nrOfRows; x++){
-			for (int y = 0; y < nrOfColumns; y++){
-				ListEntity temp = LayoutListEntity.get(x).get(y);
-				if (temp.GetHolding().equals("playlist") ){
-					returnList.add(temp);
-				}
-			}
-		}
-		return returnList;
-	}
-	public ArrayList<ListEntity> getTrapEntities(JSONObject gameState){
-		ArrayList<ListEntity> returnList = new ArrayList<ListEntity>();
-
-		JSONArray currentLayout = gameState.getJSONArray("layout");
-		nrOfRows = currentLayout.length();
-		nrOfColumns = ((JSONArray)currentLayout.get(0)).length();
-
-		for (int x = 0; x < nrOfRows; x++){
-			for (int y = 0; y < nrOfColumns; y++){
-				ListEntity temp = LayoutListEntity.get(x).get(y);
-				if (temp.GetHolding().equals("trap") ){
-					returnList.add(temp);
+		for (int x = 0; x < currentStringLayout.length; x++){
+			for (int y = 0; y < currentStringLayout[0].length; y++){
+				if (currentStringLayout[x][y].equals(type) ){
+					returnList.add( new ListEntity(x, y, type) );
 				}
 			}
 		}
@@ -195,14 +120,14 @@ public class ListBuilder {
 		for (int x = 0; x < nrOfRows; x++) {
 			for (int y = 0; y < nrOfColumns; y++) {
 				if( !(currentStringLayout[x][y]==oldStringLayout[x][y]) ){
-					LayoutListEntity.get(x).get(y).SetHolding(currentStringLayout[x][y]);
+					LayoutListEntity.get(x).get(y).setHolding(currentStringLayout[x][y]);
 				}
 			}
 		}
 
 		for (int x = 0; x < LayoutListEntity.size(); x++){
 			for(int y = 0; y < LayoutListEntity.get(x).size(); y++){
-				System.out.print(LayoutListEntity.get(x).get(y).GetHolding()+", ");
+				System.out.print(LayoutListEntity.get(x).get(y).getHolding()+", ");
 			}
 			System.out.println("");
 		}

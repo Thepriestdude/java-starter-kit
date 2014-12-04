@@ -1,6 +1,7 @@
-package main.java.com.monkeymusicchallenge.bee;
+package com.monkeymusicchallenge.bee;
 
 import java.util.List;
+import java.lang.Math;
 
 public class MonkeyAStar extends AStar {
 
@@ -13,7 +14,7 @@ public class MonkeyAStar extends AStar {
       super();
   }
 
-  public void setGoal(ListEntry node){
+  public void setGoal(ListEntity node){
     this.goal = node;
   }
 
@@ -24,11 +25,8 @@ public class MonkeyAStar extends AStar {
    * @return <code>true</code> if it is a goal, <code>false</else> otherwise.
    */
   @Override
-  protected boolean isGoal(T node){
-    if ( node.x  ) {
-
-    }
-    return false;
+  protected boolean isGoal(Object node){
+    return goal.equals(node) ? true : false;
   }
 
   /**
@@ -40,7 +38,7 @@ public class MonkeyAStar extends AStar {
    * @return The cost of the operation.
    */
   @Override
-  protected Double g(T from, T to){
+  protected Double g(Object from, Object to){
     /*
     Goal prio
     1. if inventory is full user
@@ -64,10 +62,16 @@ public class MonkeyAStar extends AStar {
    * @param to The node we are reaching.
    * @return The estimated cost to reach an object.
    */
+   /*
+   http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
+   */
   @Override
-  protected Double h(T from, T to){
-
-    return 1.0;
+  protected Double h(Object from, Object to){
+    from = (ListEntity) from;
+    to = (ListEntity) to;
+    Double dx = Math.abs((Double)(from.x - to.x));
+    Double dy = Math.abs((Double)(from.y - to.y));
+    return 2 * (dx + dy);
   }
 
 
@@ -78,34 +82,10 @@ public class MonkeyAStar extends AStar {
    * @return A list of possible next steps.
    */
   @Override
-  protected List<T> generateSuccessors(T node){
-
-    return
-
+  protected List generateSuccessors(Object node) {
+    return ((ListEntity)node).getConnections();
   }
 
-@Override
-protected boolean isGoal(Object node) {
-	// TODO Auto-generated method stub
-	return false;
-}
 
-@Override
-protected Double g(Object from, Object to) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-protected Double h(Object from, Object to) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-protected List generateSuccessors(Object node) {
-	// TODO Auto-generated method stub
-	return null;
-}
 
 }

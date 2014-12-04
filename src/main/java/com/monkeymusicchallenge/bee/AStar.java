@@ -1,4 +1,4 @@
-package main.java.com.monkeymusicchallenge.bee;
+package com.monkeymusicchallenge.bee;
 
 /*
  * A* algorithm implementation.
