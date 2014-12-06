@@ -1,4 +1,4 @@
-package main.java.com.monkeymusicchallenge.bee;
+package com.monkeymusicchallenge.bee;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -40,11 +40,11 @@ public class ListEntity {
 		return connection;
 
 	}
-	
+
 	public int getX(){
 		return this.x;
 	}
-	
+
 	public int getY(){
 		return this.y;
 	}

@@ -56,7 +56,7 @@ public class AI {
     */
 
 		// Get all goals and insert into queue
-		targetMusics = currentListBuilder.getEntitiesByType("song");
+		ArrayList<ListEntity> targetMusics = currentListBuilder.getEntitiesByType("song");
 		targetMusics.addAll(currentListBuilder.getEntitiesByType("album"));
 		targetMusics.addAll(currentListBuilder.getEntitiesByType("playlist"));
 
@@ -86,9 +86,9 @@ public class AI {
 			ArrayList<ListEntity> path = MonkeyAStar.getShortestPath(ListBuilder.getCurrentPosition(), currentTarget);
 
 			ListEntity nextNode;
-			if ( 0 > path.size() && nextNode = path.get(0) ) {
+			if ( 0 > path.size() && (nextNode = path.get(0)) ) {
 				// Decide how to move based on direction of the target
-				String move = Navigation.getDirection(nextNode)
+				String move = Navigation.getDirection(nextNode);
 				nextCommand.put("command", "move");
 				nextCommand.put("direction",  move);
 				System.out.println("Moving " + move + " to " + nextNode);
