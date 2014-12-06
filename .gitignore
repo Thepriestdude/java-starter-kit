@@ -8,3 +8,23 @@ dependency-reduced-pom.xml
 .project
 
 .classpath
+
+*.dat
+
+.metadata/.plugins/org.eclipse.jdt.core/nonChainingJarsCache
+
+.metadata/.plugins/org.eclipse.jdt.core/invalidArchivesCache
+
+*.xmi
+
+.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources
+
+*.tree
+
+*.version
+
+*.index
+
+.metadata/.log
+
+.metadata/.lock

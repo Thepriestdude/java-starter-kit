@@ -1,4 +1,4 @@
-package com.monkeymusicchallenge.bee;
+package main.java.com.monkeymusicchallenge.bee;
 
 import java.util.ArrayList;
 
@@ -152,4 +152,10 @@ public class ListBuilder {
 			System.out.println("");
 		}
 	}
+	
+	public int getNrOfRows(){
+		return this.nrOfRows;
+	}
+	
 }
+

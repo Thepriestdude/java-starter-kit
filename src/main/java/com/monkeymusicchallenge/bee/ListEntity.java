@@ -1,8 +1,10 @@
-package com.monkeymusicchallenge.bee;
+package main.java.com.monkeymusicchallenge.bee;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.mashape.unirest.request.GetRequest;
 
 
 public class ListEntity {
@@ -37,6 +39,14 @@ public class ListEntity {
 	public ArrayList<ListEntity> getConnections(){
 		return connection;
 
+	}
+	
+	public int getX(){
+		return this.x;
+	}
+	
+	public int getY(){
+		return this.y;
 	}
 
 	@Override
