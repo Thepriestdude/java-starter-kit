@@ -59,7 +59,7 @@ public class Main {
 		while (!currentGameState.getBoolean("isGameOver")) {
 			System.out.println("Remaining turns: " + currentGameState.getInt("remainingTurns"));
 
-			final Map<String, Object> nextCommand = ai.move(currentGameState);
+			final Map<String, Object> nextCommand = ai.decision(currentGameState);
 
 			nextCommand.put("team", teamName);
 			nextCommand.put("apiKey", apiKey);

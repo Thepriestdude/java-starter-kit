@@ -13,7 +13,6 @@ public class ListBuilder {
 	int nrOfColumns;
 	ListEntity currentPosition;
 
-
 	private static ListBuilder instance = null;
 
 	protected ListBuilder() {
