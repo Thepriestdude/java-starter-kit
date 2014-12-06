@@ -20,9 +20,6 @@ public class AI {
 		// Points are sorted by distance from our monkey.
 		targetsQueue = new PriorityQueue<ListEntity>(100, new Comparator<ListEntity>() {
 			public int compare(ListEntity a, ListEntity b) {
-				if (a == null || b == null) {
-					return 0;
-				}
 				ArrayList<ListEntity> pathToA = MonkeyAStar.getShortestPath(ListBuilder.getCurrentPosition(), a);
 				ArrayList<ListEntity> pathToB = MonkeyAStar.getShortestPath(ListBuilder.getCurrentPosition(), b);
 				if (pathToA == null || pathToB == null) {
@@ -61,32 +58,36 @@ public class AI {
 		targetMusics.addAll(currentListBuilder.getEntitiesByType("playlist"));
 
 		//System.out.println("Target list: "+ targetMusics);
+
 		targetsQueue.clear();
+		ListEntity nextNode;
 		for (ListEntity music : targetMusics) {
 			if (music != null) {
-				targetsQueue.offer(music);
-				//System.out.println("Adding new target to work queue "+ music);
+				ArrayList<ListEntity> path = MonkeyAStar.getShortestPath(ListBuilder.getCurrentPosition(), music);
+				if ( path != null ) {
+					targetsQueue.offer(music);
+					System.out.println("There is a path("+path+") to "+ music+" added to queue.");
+				}
 			}
 		}
-		//System.out.println("Target queue: "+ targetsQueue);
+		System.out.println("Target queue: "+targetsQueue+"");
 
 		final Map<String, Object> nextCommand = new HashMap<String, Object>();
 
-		// Execute against first in queue
-		ListEntity currentTarget = targetsQueue.peek();
-		if(currentTarget != null) {
-			System.out.println("====\nCurrent target "+currentTarget+"\n====");
+		if (targetsQueue.size()>0) {
+			// Execute against first in queue
+			ListEntity currentTarget = targetsQueue.peek();
+
 			if (currentTarget.equals(ListBuilder.getCurrentPosition())) {
 				System.out.println("We have reached the target, picking a new one");
+				//ListEntity currentPos = targetsQueue.poll();
 			}
-			// we are there!
-			if ( currentTarget.equals(ListBuilder.getCurrentPosition()) ) {
-				ListEntity currentPos =targetsQueue.poll();
-			}
-			ArrayList<ListEntity> path = MonkeyAStar.getShortestPath(ListBuilder.getCurrentPosition(), currentTarget);
 
-			ListEntity nextNode;
-			if ( 0 > path.size() && (nextNode = path.get(0)) ) {
+
+			ArrayList<ListEntity> pathToTarget = MonkeyAStar.getShortestPath(ListBuilder.getCurrentPosition(), currentTarget);
+			System.out.println("Current path to target: ["+pathToTarget+"]");
+
+			if (pathToTarget != null && pathToTarget.size() > 0 && (nextNode = pathToTarget.get(0)) != null ) {
 				// Decide how to move based on direction of the target
 				String move = Navigation.getDirection(nextNode);
 				nextCommand.put("command", "move");
@@ -97,9 +98,10 @@ public class AI {
 				System.out.println("No path to target, idle");
 			}
 		}else{
-			System.out.println("No more targets, idle");
 			nextCommand.put("command", "idle");
+			System.out.println("No path to target, idle");
 		}
+
 		return nextCommand;
 	}
 }

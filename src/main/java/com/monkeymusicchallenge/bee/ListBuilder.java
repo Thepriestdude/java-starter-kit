@@ -25,6 +25,7 @@ public class ListBuilder {
 		return instance;
 	}
 	public static ListEntity getCurrentPosition(){
+		//System.out.println("Monkey is now at "+ListBuilder.getInstance().currentPosition);
 		return ListBuilder.getInstance().currentPosition;
 	}
 
@@ -32,7 +33,7 @@ public class ListBuilder {
 		this.currentStringLayout = getStringRepresentation(gameState);
 
 		JSONArray pos = gameState.getJSONArray("position");
-		currentPosition = new ListEntity(pos.getInt(0), pos.getInt(1), "monkey");
+		currentPosition = LayoutListEntity.get(pos.getInt(0)).get(pos.getInt(1));
 		System.out.println("Monkey is now at "+currentPosition);
 
 		System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns: "+nrOfColumns);
@@ -99,10 +100,11 @@ public class ListBuilder {
 		for (int x = 0; x < currentStringLayout.length; x++){
 			for (int y = 0; y < currentStringLayout[0].length; y++){
 				if (currentStringLayout[x][y].equals(type) ){
-					returnList.add( new ListEntity(x, y, type) );
+					returnList.add( LayoutListEntity.get(x).get(y) );
 				}
 			}
 		}
+		System.out.println("Entities of type "+type+": "+returnList);
 		return returnList;
 	}
 
@@ -129,7 +131,7 @@ public class ListBuilder {
 		this.currentStringLayout = getStringRepresentation(gameState);
 
 		JSONArray pos = gameState.getJSONArray("position");
-		currentPosition = new ListEntity(pos.getInt(0), pos.getInt(1), "monkey");
+		currentPosition = LayoutListEntity.get(pos.getInt(0)).get(pos.getInt(1));
 		System.out.println("Monkey is now at "+currentPosition);
 
 		JSONArray currentLayout = gameState.getJSONArray("layout");
@@ -143,13 +145,14 @@ public class ListBuilder {
 				}
 			}
 		}
-
+		/*
 		for (int x = 0; x < LayoutListEntity.size(); x++){
 			for(int y = 0; y < LayoutListEntity.get(x).size(); y++){
-				System.out.print(LayoutListEntity.get(x).get(y).getHolding()+", ");
+				System.out.print(LayoutListEntity.get(x).get(y).getConnections()+", ");
 			}
 			System.out.println("");
 		}
+		*/
 	}
 
 	public int getNrOfRows(){
