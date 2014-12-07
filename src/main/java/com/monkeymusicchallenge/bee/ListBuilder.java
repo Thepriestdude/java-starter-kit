@@ -34,9 +34,9 @@ public class ListBuilder {
 
 		JSONArray pos = gameState.getJSONArray("position");
 		currentPosition = LayoutListEntity.get(pos.getInt(0)).get(pos.getInt(1));
-		System.out.println("Monkey is now at "+currentPosition);
+		System.out.println("! Monkey is now at "+currentPosition);
 
-		System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns: "+nrOfColumns);
+		//System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns: "+nrOfColumns);
 		//check row pairs
 		for(int x = 0; x < nrOfRows; x++){
 			for(int y = 0; y < nrOfColumns-1; y++){
@@ -104,7 +104,7 @@ public class ListBuilder {
 				}
 			}
 		}
-		System.out.println("Entities of type "+type+": "+returnList);
+		//System.out.println("Entities of type "+type+": "+returnList);
 		return returnList;
 	}
 
@@ -132,7 +132,7 @@ public class ListBuilder {
 
 		JSONArray pos = gameState.getJSONArray("position");
 		currentPosition = LayoutListEntity.get(pos.getInt(0)).get(pos.getInt(1));
-		System.out.println("Monkey is now at "+currentPosition);
+		System.out.println("! Monkey is now at "+currentPosition);
 
 		JSONArray currentLayout = gameState.getJSONArray("layout");
 		nrOfRows = currentLayout.length();

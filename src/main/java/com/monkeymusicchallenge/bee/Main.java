@@ -57,7 +57,7 @@ public class Main {
 
 		// The current game state tells you if the game is over
 		while (!currentGameState.getBoolean("isGameOver")) {
-			System.out.println("Remaining turns: " + currentGameState.getInt("remainingTurns"));
+			System.out.println("\n=============\nNEW TURN (turns left "+currentGameState.getInt("remainingTurns")+") \n");
 			ai.currentListBuilder.updateListBuilder(currentGameState);
 
 			final Map<String, Object> nextCommand = ai.decision(currentGameState);

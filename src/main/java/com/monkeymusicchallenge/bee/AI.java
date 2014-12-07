@@ -64,13 +64,14 @@ public class AI {
 		for (ListEntity music : targetMusics) {
 			if (music != null) {
 				ArrayList<ListEntity> path = MonkeyAStar.getShortestPath(ListBuilder.getCurrentPosition(), music);
+				System.out.println("# There is a path("+path+") to "+ music +"");
 				if ( path != null ) {
 					targetsQueue.offer(music);
-					System.out.println("There is a path("+path+") to "+ music+" added to queue.");
+					//System.out.println("# There is a path("+path+") to "+ music+" added to queue.");
 				}
 			}
 		}
-		System.out.println("Target queue: "+targetsQueue+"");
+		System.out.println("! Target queue: "+targetsQueue+"");
 
 		final Map<String, Object> nextCommand = new HashMap<String, Object>();
 
@@ -79,27 +80,26 @@ public class AI {
 			ListEntity currentTarget = targetsQueue.peek();
 
 			if (currentTarget.equals(ListBuilder.getCurrentPosition())) {
-				System.out.println("We have reached the target, picking a new one");
+				System.out.println("< We have reached the target, picking a new one");
 				//ListEntity currentPos = targetsQueue.poll();
 			}
 
-
 			ArrayList<ListEntity> pathToTarget = MonkeyAStar.getShortestPath(ListBuilder.getCurrentPosition(), currentTarget);
-			System.out.println("Current path to target: ["+pathToTarget+"]");
+			System.out.println("- Current path to target: ["+pathToTarget+"]");
 
 			if (pathToTarget != null && pathToTarget.size() > 0 && (nextNode = pathToTarget.get(0)) != null ) {
 				// Decide how to move based on direction of the target
 				String move = Navigation.getDirection(nextNode);
 				nextCommand.put("command", "move");
 				nextCommand.put("direction",  move);
-				System.out.println("Moving " + move + " to " + nextNode);
+				System.out.println("- Moving " + move + " to " + nextNode);
 			}else{
 				nextCommand.put("command", "idle");
-				System.out.println("No path to target, idle");
+				System.out.println("- No path to target, idle");
 			}
 		}else{
 			nextCommand.put("command", "idle");
-			System.out.println("No path to target, idle");
+			System.out.println("- No path to target, idle");
 		}
 
 		return nextCommand;
