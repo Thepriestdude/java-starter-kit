@@ -87,9 +87,9 @@ public class MonkeyAStar extends AStar {
    */
   @Override
   protected Double h(Object ofrom, Object oto){
-    if (ofrom == null || oto == null) {
+    /*if (ofrom == null || oto == null) {
       return 999999.0;
-    }
+    }*/
     ListEntity from = (ListEntity) ofrom;
     ListEntity to = (ListEntity) oto;
     int dx = Math.abs(from.x - to.x);
@@ -105,13 +105,13 @@ public class MonkeyAStar extends AStar {
    * @return A list of possible next steps.
    */
   @Override
-  protected List generateSuccessors(Object onode) {
-    ListEntity node = (ListEntity)onode;
+  protected List generateSuccessors(Object node) {
+    /*ListEntity node = (ListEntity)onode;
     if (node == null) {
       return new ArrayList<ListEntity>();
-    }
-    System.out.println("Connections from "+node+" are "+node.getConnections());
-    return node.getConnections();
+    }*/
+    //System.out.println("Connections from "+node+" are "+node.getConnections());
+    return ((ListEntity)node).getConnections();
   }
 
 
