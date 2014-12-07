@@ -160,8 +160,14 @@ public class ListBuilder {
 	}
 
 	public ListEntity somethingNearBy(){
+		ListEntity currentPositionMonkey = getCurrentPosition();
+		ArrayList<ListEntity> connections = currentPositionMonkey.getConnections();
+
+		for(ListEntity lE : connections) {
+			if (lE.getHolding() != "empty"){
+				return lE;
+			}
+		}
 		return null;
 	}
-
-
 }
