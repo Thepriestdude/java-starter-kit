@@ -1,4 +1,4 @@
-package com.monkeymusicchallenge.bee;
+package main.java.com.monkeymusicchallenge.bee;
 
 import java.util.ArrayList;
 
@@ -35,11 +35,10 @@ public class ListBuilder {
 	public ArrayList<ArrayList<ListEntity>> createList(JSONObject gameState) {
 		this.currentStringLayout = getStringRepresentation(gameState);
 		JSONArray pos = gameState.getJSONArray("position");
-
 		currentXForMonkey = pos.getInt(0);
 		currentYForMonkey = pos.getInt(1);
 
-		//System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns: "+nrOfColumns);
+		System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns: "+nrOfColumns);
 		//check row pairs
 		for(int x = 0; x < nrOfRows; x++){
 			for(int y = 0; y < nrOfColumns-1; y++){
@@ -52,7 +51,6 @@ public class ListBuilder {
 					//add connectivity for both nodes
 					LayoutListEntity.get(x).get(y).addConnection(LayoutListEntity.get(x).get(y+1));
 					LayoutListEntity.get(x).get(y+1).addConnection(LayoutListEntity.get(x).get(y));
-
 				}
 			}
 		}
@@ -69,10 +67,13 @@ public class ListBuilder {
 					//add connectivity for both nodes
 					LayoutListEntity.get(x).get(y).addConnection(LayoutListEntity.get(x+1).get(y));
 					LayoutListEntity.get(x+1).get(y).addConnection(LayoutListEntity.get(x).get(y));
-
 				}
 			}
 		}
+		
+		//update the tunnel connections
+		tunnelConnections();
+		
 		return LayoutListEntity;
 	}
 
@@ -107,7 +108,7 @@ public class ListBuilder {
 				}
 			}
 		}
-		//System.out.println("Entities of type "+type+": "+returnList);
+		System.out.println("Entities of type "+type+": "+returnList);
 		return returnList;
 	}
 
@@ -132,9 +133,8 @@ public class ListBuilder {
 	public void updateListBuilder(JSONObject gameState) {
 		this.oldStringLayout = this.currentStringLayout;
 		this.currentStringLayout = getStringRepresentation(gameState);
-
+		
 		JSONArray pos = gameState.getJSONArray("position");
-
 		currentXForMonkey = pos.getInt(0);
 		currentYForMonkey = pos.getInt(1);
 
@@ -158,16 +158,46 @@ public class ListBuilder {
 		}
 		*/
 	}
-
+	
 	public ListEntity somethingNearBy(){
 		ListEntity currentPositionMonkey = getCurrentPosition();
 		ArrayList<ListEntity> connections = currentPositionMonkey.getConnections();
-
+		
 		for(ListEntity lE : connections) {
 			if (lE.getHolding() != "empty"){
 				return lE;
 			}
 		}
 		return null;
+	}	
+	
+	public void tunnelConnections() {
+		
+		//för alla rader
+		for(int x = 0; x < nrOfRows; x++){
+			//för alla kolumner
+			for(int y = 0; y < nrOfColumns; y++){
+				
+				//gör det bara om det är en tunnel
+				if(currentStringLayout[x][y].contains("tunnel-")){
+					
+					//kontrollera närliggande object på alla rader 
+					for(int xx = x; xx < nrOfRows; x++ ) {
+						
+						//kontrollera alla columner (utom objectet själv)
+						for(int yy = y+1; yy < nrOfColumns; y++ ) {
+							
+							//om det är samma string i båda (tunnel-"" så kommer de att få en connection)
+							if(currentStringLayout[x][y].equals(currentStringLayout[xx][yy]));
+							
+							LayoutListEntity.get(x).get(y).addConnection(LayoutListEntity.get(yy).get(xx));
+							LayoutListEntity.get(xx).get(yy).addConnection(LayoutListEntity.get(y).get(x));
+
+						}	
+					}
+				}
+			}
+		}
 	}
 }
+
