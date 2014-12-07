@@ -38,7 +38,6 @@ public class ListEntity {
 	}
 	public ArrayList<ListEntity> getConnections(){
 		return connection;
-
 	}
 
 	public int getX(){
@@ -60,6 +59,6 @@ public class ListEntity {
 	}
 
 	public String toString() {
-		return "ListEntity{" + x + ", " + y + ", "+holding+"}";
+		return "ListEntity{" + x + ", " + y + ", "+holding+", conn:"+connection.size()+"}";
 	}
 }

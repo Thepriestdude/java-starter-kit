@@ -1,6 +1,7 @@
 package com.monkeymusicchallenge.bee;
 
 import java.util.List;
+import java.util.LinkedList;
 import java.util.ArrayList;
 import java.lang.Math;
 
@@ -23,7 +24,13 @@ public class MonkeyAStar extends AStar {
 
   public static ArrayList<ListEntity> getShortestPath(ListEntity start, ListEntity end){
     MonkeyAStar.getInstance().setGoal(end);
-    return (ArrayList<ListEntity>)MonkeyAStar.getInstance().compute(start);
+    ArrayList<ListEntity> result = new ArrayList<ListEntity>();
+    LinkedList<ListEntity> path = (LinkedList<ListEntity>)MonkeyAStar.getInstance().compute(start);
+    if (path != null) {
+      result.addAll(path);
+      return result;
+    }
+    return null;
 
   }
 
@@ -98,11 +105,13 @@ public class MonkeyAStar extends AStar {
    * @return A list of possible next steps.
    */
   @Override
-  protected List generateSuccessors(Object node) {
+  protected List generateSuccessors(Object onode) {
+    ListEntity node = (ListEntity)onode;
     if (node == null) {
       return new ArrayList<ListEntity>();
     }
-    return (ArrayList<ListEntity>)((ListEntity)node).getConnections();
+    System.out.println("Connections from "+node+" are "+node.getConnections());
+    return node.getConnections();
   }
 
 
