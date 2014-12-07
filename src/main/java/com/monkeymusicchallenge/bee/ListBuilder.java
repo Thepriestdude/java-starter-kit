@@ -15,18 +15,19 @@ public class ListBuilder {
 	static int currentXForMonkey;
 	static int currentYForMonkey;
 
-
 	private static ListBuilder instance = null;
 
 	protected ListBuilder() {
 		// Exists only to defeat instantiation.
 	}
+	
 	public static ListBuilder getInstance() {
 		if(instance == null) {
 			instance = new ListBuilder();
 		}
 		return instance;
 	}
+	
 	public static ListEntity getCurrentPosition(){
 		return LayoutListEntity.get(currentXForMonkey).get(currentYForMonkey);
 
