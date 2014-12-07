@@ -1,12 +1,12 @@
 package com.monkeymusicchallenge.bee;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 public class Navigation {
 
 	public static String getDirection(ListEntity listEntityToCheck) {
 		ListBuilder listbuilder = new ListBuilder();
-		ListEntity currentPosition = ListBuilder.getCurrentPosition();
+		ListEntity currentPosition = listbuilder.getCurrentPosition();
 		ListEntity move = listEntityToCheck;
 
 		int monkeyPosX = currentPosition.getX();
@@ -64,6 +64,26 @@ public class Navigation {
 	}
 
 	private static String randomDirection() {
-		return new String[] {"up", "down", "left", "right"}[ThreadLocalRandom.current().nextInt(4)];
+		Random random = new Random();
+		int randInt = random.nextInt() % 3;
+		String direction = "up";
+
+		switch (randInt) {
+			case 0 :	direction = "up";
+						break;
+
+			case 1 :	direction = "down";
+						break;
+
+			case 2 :	direction = "right";
+						break;
+
+			case 3 : 	direction = "left";
+						break;
+		}
+		return direction;
+
+
+
 	}
 }

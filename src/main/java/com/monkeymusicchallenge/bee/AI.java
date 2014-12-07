@@ -64,7 +64,7 @@ public class AI {
 		for (ListEntity music : targetMusics) {
 			if (music != null) {
 				ArrayList<ListEntity> path = MonkeyAStar.getShortestPath(ListBuilder.getCurrentPosition(), music);
-				System.out.println("# There is a path("+path+") to "+ music +"");
+				System.out.println("# From "+ListBuilder.getCurrentPosition()+" to "+music+" path("+path+")");
 				if ( path != null ) {
 					targetsQueue.offer(music);
 					//System.out.println("# There is a path("+path+") to "+ music+" added to queue.");

@@ -8,10 +8,13 @@ import org.json.JSONObject;
 public class ListBuilder {
 	String[][] oldStringLayout;
 	String[][] currentStringLayout;
-	ArrayList<ArrayList<ListEntity>> LayoutListEntity = new ArrayList<ArrayList<ListEntity>>();
+	static ArrayList<ArrayList<ListEntity>> LayoutListEntity = new ArrayList<ArrayList<ListEntity>>();
 	int nrOfRows;
 	int nrOfColumns;
 	ListEntity currentPosition;
+	static int currentXForMonkey;
+	static int currentYForMonkey;
+
 
 	private static ListBuilder instance = null;
 
@@ -25,16 +28,16 @@ public class ListBuilder {
 		return instance;
 	}
 	public static ListEntity getCurrentPosition(){
-		//System.out.println("Monkey is now at "+ListBuilder.getInstance().currentPosition);
-		return ListBuilder.getInstance().currentPosition;
+		return LayoutListEntity.get(currentXForMonkey).get(currentYForMonkey);
+
 	}
 
 	public ArrayList<ArrayList<ListEntity>> createList(JSONObject gameState) {
 		this.currentStringLayout = getStringRepresentation(gameState);
-
 		JSONArray pos = gameState.getJSONArray("position");
-		currentPosition = LayoutListEntity.get(pos.getInt(0)).get(pos.getInt(1));
-		System.out.println("! Monkey is now at "+currentPosition);
+
+		currentXForMonkey = pos.getInt(0);
+		currentYForMonkey = pos.getInt(1);
 
 		//System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns: "+nrOfColumns);
 		//check row pairs
@@ -131,8 +134,9 @@ public class ListBuilder {
 		this.currentStringLayout = getStringRepresentation(gameState);
 
 		JSONArray pos = gameState.getJSONArray("position");
-		currentPosition = LayoutListEntity.get(pos.getInt(0)).get(pos.getInt(1));
-		System.out.println("! Monkey is now at "+currentPosition);
+
+		currentXForMonkey = pos.getInt(0);
+		currentYForMonkey = pos.getInt(1);
 
 		JSONArray currentLayout = gameState.getJSONArray("layout");
 		nrOfRows = currentLayout.length();
@@ -155,8 +159,9 @@ public class ListBuilder {
 		*/
 	}
 
-	public int getNrOfRows(){
-		return this.nrOfRows;
+	public ListEntity somethingNearBy(){
+		return null;
 	}
+
 
 }
