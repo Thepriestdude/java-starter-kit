@@ -1,4 +1,4 @@
-package com.monkeymusicchallenge.bee;
+package main.java.com.monkeymusicchallenge.bee;
 
 import java.util.ArrayList;
 
@@ -8,10 +8,13 @@ import org.json.JSONObject;
 public class ListBuilder {
 	String[][] oldStringLayout;
 	String[][] currentStringLayout;
-	ArrayList<ArrayList<ListEntity>> LayoutListEntity = new ArrayList<ArrayList<ListEntity>>();
+	static ArrayList<ArrayList<ListEntity>> LayoutListEntity = new ArrayList<ArrayList<ListEntity>>();
 	int nrOfRows;
 	int nrOfColumns;
 	ListEntity currentPosition;
+	static int currentXForMonkey;
+	static int currentYForMonkey;
+
 
 	private static ListBuilder instance = null;
 
@@ -25,14 +28,14 @@ public class ListBuilder {
 		return instance;
 	}
 	public static ListEntity getCurrentPosition(){
-		return ListBuilder.getInstance().currentPosition;
+		return LayoutListEntity.get(currentXForMonkey).get(currentYForMonkey);
 	}
 
 	public ArrayList<ArrayList<ListEntity>> createList(JSONObject gameState) {
 		this.currentStringLayout = getStringRepresentation(gameState);
-
 		JSONArray pos = gameState.getJSONArray("position");
-		currentPosition = new ListEntity(pos.getInt(0), pos.getInt(1), "monkey");
+		currentXForMonkey = pos.getInt(0);
+		currentYForMonkey = pos.getInt(1);
 		System.out.println("Monkey is now at "+currentPosition);
 
 		System.out.println("Current rows: "+nrOfRows+"\nCurrent Columns: "+nrOfColumns);
@@ -127,10 +130,10 @@ public class ListBuilder {
 	public void updateListBuilder(JSONObject gameState) {
 		this.oldStringLayout = this.currentStringLayout;
 		this.currentStringLayout = getStringRepresentation(gameState);
-
+		
 		JSONArray pos = gameState.getJSONArray("position");
-		currentPosition = new ListEntity(pos.getInt(0), pos.getInt(1), "monkey");
-		System.out.println("Monkey is now at "+currentPosition);
+		currentXForMonkey = pos.getInt(0);
+		currentYForMonkey = pos.getInt(1);
 
 		JSONArray currentLayout = gameState.getJSONArray("layout");
 		nrOfRows = currentLayout.length();
@@ -151,9 +154,11 @@ public class ListBuilder {
 			System.out.println("");
 		}
 	}
-
-	public int getNrOfRows(){
-		return this.nrOfRows;
+	
+	public ListEntity somethingNearBy(){
+		return null;
 	}
-
+	
+	
 }
+
